@@ -1,0 +1,27 @@
+ErrorDocument 403 /404.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /404.php
+DirectoryIndex kpp.php
+AddDefaultCharset utf-8
+php_value display_errors 1
+php_value memory_limit 128M
+php_value max_execution_time 120
+php_value session.gc_maxlifetime 86400
+php_value session.cookie_lifetime 86400
+#Защищаем .htaccess файл
+<files .htaccess="">
+order allow,deny
+deny from all
+</files>
+
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+</IfModule>
+
+Options  -Indexes
